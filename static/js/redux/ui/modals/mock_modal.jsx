@@ -15,7 +15,7 @@ export default class PopUp extends Component {
           <form>
             <h3>Register!</h3>
             <label>
-              Name:
+              Namee:
               <input type="text" name="name" />
             </label>
             <br />
