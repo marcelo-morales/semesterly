@@ -25,6 +25,15 @@ from semesterly.settings import get_secret
 
 hashids = Hashids(salt=get_secret('HASHING_SALT'))
 
+class MockModalStudent(models.Model):
+    """
+    Model that has primary information of a student, such as 
+    first name, last name, and graduating class
+    """
+    first_name = models.CharField(max_length=100, null=True)
+    last_name = models.CharField(max_length=100, null=True)
+    graduating_class =  models.IntegerField(blank=True, null=True)
+
 
 class Student(models.Model):
     """ Database object representing a student.
@@ -59,6 +68,9 @@ class Student(models.Model):
     first_name = models.CharField(max_length=255, default='', null=True)
     last_name = models.CharField(max_length=255, default='', null=True)
     disabilities = models.NullBooleanField(null=True, default=False)
+
+    #adding favorite number as part of technical challenge
+    favorite_num = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return "{0}".format(self.jhed)

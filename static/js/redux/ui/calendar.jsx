@@ -22,6 +22,7 @@ import SlotManagerContainer from './containers/slot_manager_container';
 import CellContainer from './containers/cell_container';
 import { DAYS } from '../constants/constants';
 import { ShareLink } from './master_slot';
+import MockModal from './modals/mock_modal';
 import * as SemesterlyPropTypes from '../constants/semesterlyPropTypes';
 
 const Row = (props) => {
@@ -57,6 +58,7 @@ Row.propTypes = {
 };
 
 class Calendar extends React.Component {
+
   constructor(props) {
     super(props);
     this.fetchShareTimetableLink = this.fetchShareTimetableLink.bind(this);
@@ -69,8 +71,20 @@ class Calendar extends React.Component {
       shareLinkShown: false,
       timelineStyle: this.getTimelineStyle(),
       hoverCustomSlot: false,
+      seen: false,
     };
+    togglePop = () => {
+      this.setState({
+       seen: !this.state.seen
+      });
+     };
   }
+
+  // togglePop = () => {
+  //   this.setState({
+  //    seen: !this.state.seen
+  //   });
+  //  };
 
   componentDidMount() {
     // Here, we set an interval so that the timeline position is updated once
@@ -156,6 +170,10 @@ class Calendar extends React.Component {
     form.submit();
   }
 
+  mockModalClick () {
+
+  }
+
   hoverCustomSlot() {
     this.setState({ hoverCustomSlot: !this.state.hoverCustomSlot });
   }
@@ -166,6 +184,32 @@ class Calendar extends React.Component {
         Click, drag, and release to create your custom event
       </h4>)
       : null;
+
+    const addMockModal = this.props.registrarSupported ? (
+      <div className="cal-btn-wrapper">
+        <button
+          type="submit"
+          form="form1"
+          className="save-timetable add-button"
+          data-for="sis-btn-tooltip"
+          data-tip
+          onClick={this.state.seen ? <MockModal toggle={this.togglePop} /> : null}
+        >
+          <img src="/static/img/star.png" alt="SIS" style={{ marginTop: '2px' }} />
+        </button>
+        <ReactTooltip
+          id="sis-btn-tooltip"
+          class="tooltip"
+          type="dark"
+          place="bottom"
+          effect="solid"
+        >
+          <span>See my Mock Modal!</span>
+        </ReactTooltip>
+      </div>
+    ) : null;   
+
+
     const addSISButton = this.props.registrarSupported ? (
       <div className="cal-btn-wrapper">
         <button
@@ -189,6 +233,8 @@ class Calendar extends React.Component {
         </ReactTooltip>
       </div>
     ) : null;
+
+
     const shareButton = (
       <div className="cal-btn-wrapper">
         <button
@@ -342,6 +388,7 @@ class Calendar extends React.Component {
             { pilot }
           </div>
           <div className="fc-right">
+            { addMockModal }
             { addSISButton }
             { addCustomEventButton }
             { shareButton }
