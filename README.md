@@ -39,7 +39,7 @@ For questions and support, please contact us at <contact@semester.ly> or ask in 
 </div>
 
 <p align="center" style="font-weight:bold">
-Made with <a href="https://contrib.rocks/preview?repo=jhuopensource%2Fsemesterly">contributors-img</a>.
+Made withh <a href="https://contrib.rocks/preview?repo=jhuopensource%2Fsemesterly">contributors-img</a>.
 </p>
 
 ## License
